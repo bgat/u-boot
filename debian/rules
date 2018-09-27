@@ -6,24 +6,17 @@ CROSS_COMPILE=$(DEB_HOST_GNU_TYPE)-
 
 JOBS=$(shell expr 2 \* $(shell cat /proc/cpuinfo | grep processor | wc -l))
 KARGS=ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -j$(JOBS) V=1
-DESTDIR=debian/u-boot-boneblack
-KCONFIG_CONFIG=am335x_boneblack
+KCONFIG_CONFIG=am335x_boneblack_defconfig
 
 %:
 	dh $@
 
 override_dh_auto_clean:
 	$(MAKE) $(KARGS) distclean
-	rm -rf $(DESTDIR) $(DESTDIR_FW)
 
 override_dh_auto_build:
 	$(MAKE) $(KARGS) $(KCONFIG_CONFIG)
 	$(MAKE) $(KARGS) all
-
-override_dh_auto_install:
-	mkdir -p $(DESTDIR)/boot
-	cp -v MLO $(DESTDIR)/boot
-	cp -v u-boot.img $(DESTDIR)/boot
 
 override_dh_auto_configure:
 override_dh_auto_test:
