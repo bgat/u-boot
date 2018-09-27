@@ -1,0 +1,13 @@
+Source: u-boot
+Section: bootloader
+Priority: extra
+Maintainer: Bill Gatliff <bgat@billgatliff.com>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 3.9.3
+Vcs-Git: https://github.com/bgat/u-boot.git
+
+Package: u-boot-boneblack
+Architecture: armhf armel
+Depends: ${misc:Depends}
+Description: Das U-Boot bootloader for Beaglebone Black
+ This package is part of Pragmatux http://pragmatux.org
